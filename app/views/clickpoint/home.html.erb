@@ -1,25 +1,37 @@
-<div id="clickee"></div>
+<% @clickees.each do |clickee| %>
+	<div class="clickees" id="clickee<%= clickee.id %>"></div>
+<% end %>
 
 <script type="text/javascript">
 
 	$(function(){
 
-		$('#clickee').css({
-			"top": "<%= @y %>px",
+		<% @clickees.each do |clickee| %>
 
-			"left": "<%= @x %>px"
-		});
+			$('#clickee<%= clickee.id %>').css({
+				"top": "<%= clickee.y %>px",
+				"left": "<%= clickee.x %>px"
+			});
+
+		<% end %>
 
 		$("body").click(function(e) {
-			$('#clickee').css({
+
+			$.get("/lastID.json", function(data){
+				console.log(data.id);
+				$("body").append('<div class="clickees" id="clickee'+ data.id +'"</div>');
+
+			$('#clickee' + data.id + '').css({
 				"top": "" + e.pageY + "px",
 				"left": "" + e.pageX + "px"
 			});
-			$.ajax({
-        		url: "/update",
-        		method: "PUT",
-        		data: { clickee: { x : e.pageX, y: e.pageY } }
-      		});
+
+      			$.post("/clickpoint", { clickee: { x : e.pageX, y: e.pageY }});
+      			
+			});
+
+			
+
     	});
 
 	});

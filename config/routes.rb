@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root "clickpoint#home"
 
-  put "/update" => "clickpoint#update"
+  resources :clickpoint
+
+  get '/lastID' => 'clickpoint#lastID'
 
 end
