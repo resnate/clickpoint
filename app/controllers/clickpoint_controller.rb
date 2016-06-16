@@ -1,20 +1,19 @@
 class ClickpointController < ApplicationController
 
 	def home
-		@top = "50px"
-		@left = "50px"
+		@x = Clickee.first.x
+		@y = Clickee.first.y
 	end
 
 	def update
-		@top = params[:top]	
-		@left = params[:left]
-		@pastGig.update_attributes(clickee_params)
+		Clickee.first.update_attributes(clickee_params)
+		render nothing: true
 	end
 
 	private
 
     	def clickee_params
-      		params.require(:clickee).permit(:top, :left)
+      		params.require(:clickee).permit(:x, :y)
     	end
 
 end

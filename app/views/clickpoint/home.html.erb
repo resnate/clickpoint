@@ -5,8 +5,9 @@
 	$(function(){
 
 		$('#clickee').css({
-			"top": "<%= @top %>",
-			"left": "<%= @left %>"
+			"top": "<%= @y %>px",
+
+			"left": "<%= @x %>px"
 		});
 
 		$("body").click(function(e) {
@@ -17,7 +18,7 @@
 			$.ajax({
         		url: "/update",
         		method: "PUT",
-        		data: { x : e.pageX, y: e.pageY }
+        		data: { clickee: { x : e.pageX, y: e.pageY } }
       		});
     	});
 
