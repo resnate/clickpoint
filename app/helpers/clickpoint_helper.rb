@@ -1,0 +1,2 @@
+module ClickpointHelper
+end

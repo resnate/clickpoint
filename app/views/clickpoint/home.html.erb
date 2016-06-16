@@ -1,0 +1,26 @@
+<div id="clickee"></div>
+
+<script type="text/javascript">
+
+	$(function(){
+
+		$('#clickee').css({
+			"top": "<%= @top %>",
+			"left": "<%= @left %>"
+		});
+
+		$("body").click(function(e) {
+			$('#clickee').css({
+				"top": "" + e.pageY + "px",
+				"left": "" + e.pageX + "px"
+			});
+			$.ajax({
+        		url: "/update",
+        		method: "PUT",
+        		data: { x : e.pageX, y: e.pageY }
+      		});
+    	});
+
+	});
+
+</script>
